@@ -98,7 +98,7 @@ int Persent(int a, int b) {
     int res;
     res = MulDiv(a, b, 100);
 }
-
+/////////////Заимствовование/////////////////
 int StrToInt(char *s) // функция преобразования строки в число
 {
     int temp = 0;
@@ -151,7 +151,7 @@ char *IntToStr(int n) {
     temp[k] = '\0';
     return (temp);
 }
-
+//////////конец заимствования/////////////
 // Стартовая функция
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine, int nCmdShow) {
