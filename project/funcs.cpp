@@ -144,7 +144,7 @@ int from10toyour(int num, int num2) {
  * @param b число процентов
  * @return новое число
  * */
-int Persent(int a, int b) {
+int Percent(int a, int b) {
     int res;
     res = MulDiv(a, b, 100);
     return res;

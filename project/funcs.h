@@ -25,7 +25,7 @@ int from10to4(int num);
 
 int from10toyour(int num, int num2);
 
-int Persent(int a, int b);
+int Percent(int a, int b);
 
 int StrToInt(char *s);
 

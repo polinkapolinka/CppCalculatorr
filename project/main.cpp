@@ -303,7 +303,7 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
                 a = StrToInt(StrA);
                 Len = GetWindowText(hEdt11, StrA, 20);
                 b = StrToInt(StrA);
-                sum = Persent(a, b); // находим процент по функции
+                sum = Percent(a, b); // находим процент по функции
                 SetWindowText(hStat8, IntToStr(sum));
             }
 
