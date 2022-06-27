@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <string.h> //puts
 #include <windows.h>
-#import "funcs.h"
+#include "funcs.h"
 
 LRESULT WINAPI WndProc(HWND, UINT, WPARAM,
                        LPARAM); // функция обработки сообщений окна
