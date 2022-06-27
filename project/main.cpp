@@ -1,157 +1,14 @@
-#include "iostream"
+#include <iostream>
 #include <cmath>
-#include <conio.h> //getch
+ //getch
 #include <cstdlib>
 #include <string.h> //puts
 #include <windows.h>
-
+#import "funcs.h"
 
 LRESULT WINAPI WndProc(HWND, UINT, WPARAM,
                        LPARAM); // функция обработки сообщений окна
-// Функция преобразования строки в число
-int Encrypt0(int a, int b) { //функция суммирования
-    int k;
-    k = a + b;
-}
 
-int Encrypt1(int a, int b) { //функция вычитания
-    int k;
-    k = a - b;
-}
-
-int Encrypt2(int a, int b) { //функция умножения
-    int k;
-    k = a * b;
-}
-
-int Encrypt4(int a) { //функция квадрата
-    int k;
-    k = a * a;
-}
-
-int Encrypt5(int a) { // функция придумывания рандомной последовательности
-    a = rand() * 100000 + rand() * 10000 + rand() * 1000 + rand() * 100 +
-        rand() * 10 + rand();
-}
-
-int Logb(int a, int b) { // функция вычисления логарифма по заданному основанию
-    int k;
-    k = std::log(a) / std::log(b);
-}
-
-//Функция перевода из 10-чной в 2-чную
-int from10to2(int num) {
-    {
-        int bin = 0, k = 1;
-
-        while (num) {
-            bin += (num % 2) * k;
-            k *= 10;
-            num /= 2;
-        }
-
-        return bin;
-    }
-}
-
-//Функция перевода из 10-чной в 8-чную
-int from10to8(int num) {
-    int bin = 0, k = 1;
-
-    while (num) {
-        bin += (num % 8) * k;
-        k *= 10;
-        num /= 8;
-    }
-
-    return bin;
-}
-
-//Функция перевода из 10-чной  в 4-ную
-int from10to4(int num) {
-    int bin = 0, k = 1;
-
-    while (num) {
-        bin += (num % 4) * k;
-        k *= 10;
-        num /= 4;
-    }
-
-    return bin;
-}
-
-//
-int from10toyour(int num, int num2) {
-    int bin = 0, k = 1;
-
-    while (num) {
-        bin += (num % num2) * k;
-        k *= 10;
-        num /= num2;
-    }
-
-    return bin;
-}
-
-//Функция счета процентов
-int Persent(int a, int b) {
-    int res;
-    res = MulDiv(a, b, 100);
-}
-/////////////Заимствовование/////////////////
-int StrToInt(char *s) // функция преобразования строки в число
-{
-    int temp = 0;
-    int i = 0;
-    int sign = 0;
-    if (s[i] == '-') {
-        sign = 1;
-        i++;
-    }
-    while (s[i] >= 0x30 && s[i] <= 0x39) {
-        temp = temp + (s[i] & 0x0F);
-        temp = temp * 10;
-        i++;
-    }
-    temp = temp / 10;
-    if (sign == 1)
-        temp = -temp;
-    return (temp);
-}
-
-// Функция преобразования числа в строку
-char *IntToStr(int n) {
-    char s[40], t, *temp;
-    int i, k;
-    int sign = 0;
-    i = 0;
-    k = n;
-    if (k < 0) {
-        sign = 1;
-        k = -k;
-    }
-    do {
-        t = k % 10;
-        k = k / 10;
-        s[i] = t | 0x30;
-        i++;
-    } while (k > 0);
-    if (sign == 1) {
-        s[i] = '-';
-        i++;
-    }
-    temp = new char[i];
-    k = 0;
-    i--;
-    while (i >= 0) {
-        temp[k] = s[i];
-        i--;
-        k++;
-    }
-    temp[k] = '\0';
-    return (temp);
-}
-//////////конец заимствования/////////////
 // Стартовая функция
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine, int nCmdShow) {
@@ -168,11 +25,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     // Создание окна
     hwnd = CreateWindow(
             "MyClass", "Calculator", //создание и расположение рабочего окна
-            WS_OVERLAPPEDWINDOW, 300, 300, 1600, 600, NULL, NULL, hInstance, NULL);
+            WS_OVERLAPPEDWINDOW, 300, 300, 1600, 600, nullptr, nullptr, hInstance, nullptr);
     ShowWindow(hwnd, nCmdShow); // отображение окна
     UpdateWindow(hwnd);         // перерисовка окна
     // Цикл обработки сообщений
-    while (GetMessage(&msg, NULL, 0, 0)) {
+    while (GetMessage(&msg, nullptr, 0, 0)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
@@ -222,125 +79,125 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
 
             hEdt1 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 50, 120, 120, 20, hwnd, 0, hInst, NULL);
+                                 50, 120, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             hEdt2 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 250, 120, 120, 20, hwnd, 0, hInst, NULL);
+                                 250, 120, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt2, SW_SHOWNORMAL);
             hEdt3 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 150, 340, 120, 20, hwnd, 0, hInst, NULL);
+                                 150, 340, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
             hEdt4 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 550, 300, 120, 20, hwnd, 0, hInst, NULL);
+                                 550, 300, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
             hEdt5 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 750, 300, 120, 20, hwnd, 0, hInst, NULL);
+                                 750, 300, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
             hEdt6 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 1150, 300, 120, 20, hwnd, 0, hInst, NULL);
+                                 1150, 300, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             hEdt7 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 990, 300, 120, 20, hwnd, 0, hInst, NULL);
+                                 990, 300, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
             hEdt8 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 1350, 70, 120, 20, hwnd, 0, hInst, NULL);
+                                 1350, 70, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
             hEdt9 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 1350, 250, 120, 20, hwnd, 0, hInst, NULL);
+                                 1350, 250, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             hEdt10 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 1350, 290, 120, 20, hwnd, 0, hInst, NULL);
+                                 1350, 290, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             hEdt10 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 950, 80, 120, 20, hwnd, 0, hInst, NULL);
+                                 950, 80, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             hEdt11 =
                     CreateWindow("edit", " ", WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT,
-                                 1070, 80, 120, 20, hwnd, 0, hInst, NULL);
+                                 1070, 80, 120, 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hEdt1, SW_SHOWNORMAL);
 
             // Создаем и показываем кнопки
             Button2 = CreateWindow("button", "+", WS_CHILD | WS_VISIBLE | WS_BORDER, 130,
-                                   180, 70, 30, hwnd, 0, hInst, NULL);
+                                   180, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button3 = CreateWindow("button", "-", WS_CHILD | WS_VISIBLE | WS_BORDER, 210,
-                                   180, 70, 30, hwnd, 0, hInst, NULL);
+                                   180, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button4 = CreateWindow("button", "*", WS_CHILD | WS_VISIBLE | WS_BORDER, 290,
-                                   180, 70, 30, hwnd, 0, hInst, NULL);
+                                   180, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button5 = CreateWindow("button", "square", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                   175, 360, 70, 30, hwnd, 0, hInst, NULL);
+                                   175, 360, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button6 =
                     CreateWindow("button", "password", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                 650, 60, 70, 30, hwnd, 0, hInst, NULL);
+                                 650, 60, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button7 = CreateWindow("button", "sqrt", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                   550, 330, 70, 30, hwnd, 0, hInst, NULL);
+                                   550, 330, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button8 = CreateWindow("button", "10", WS_CHILD | WS_VISIBLE | WS_BORDER, 750,
-                                   330, 70, 30, hwnd, 0, hInst, NULL);
+                                   330, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button9 = CreateWindow("button", "2", WS_CHILD | WS_VISIBLE | WS_BORDER, 820,
-                                   330, 70, 30, hwnd, 0, hInst, NULL);
+                                   330, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button10 = CreateWindow("button", "5", WS_CHILD | WS_VISIBLE | WS_BORDER, 890,
-                                    330, 70, 30, hwnd, 0, hInst, NULL);
+                                    330, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button11 = CreateWindow("button", "Log", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                    1100, 330, 70, 30, hwnd, 0, hInst, NULL);
+                                    1100, 330, 70, 30, hwnd, nullptr, hInst, nullptr);
 
             Button12 = CreateWindow("button", "2", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                    1360, 100, 70, 30, hwnd, 0, hInst, NULL);
+                                    1360, 100, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button13 = CreateWindow("button", "8", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                    1430, 100, 70, 30, hwnd, 0, hInst, NULL);
+                                    1430, 100, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button14 = CreateWindow("button", "4", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                    1500, 100, 70, 30, hwnd, 0, hInst, NULL);
+                                    1500, 100, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button15 =
                     CreateWindow("button", "convert", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                 1400, 320, 70, 30, hwnd, 0, hInst, NULL);
+                                 1400, 320, 70, 30, hwnd, nullptr, hInst, nullptr);
             Button16 = CreateWindow("button", "%", WS_CHILD | WS_VISIBLE | WS_BORDER,
-                                    1025, 110, 70, 30, hwnd, 0, hInst, NULL);
+                                    1025, 110, 70, 30, hwnd, nullptr, hInst, nullptr);
             ShowWindow(Button, SW_SHOWNORMAL);
             ShowWindow(Button2, SW_SHOWNORMAL);
             // Создаем и показываем поле текста для результата
             hStat = CreateWindow("static", " ", WS_CHILD | WS_VISIBLE, 125, 260, 200,
-                                 20, hwnd, 0, hInst, NULL);
+                                 20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
 
             hStat1 = CreateWindow("static", " ", WS_CHILD | WS_VISIBLE, 125, 420, 200,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
 
             hStat2 = CreateWindow("static", " ", WS_CHILD | WS_VISIBLE, 590, 100, 200,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
 
             hStat3 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 550, 390, 100,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
             hStat4 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 750, 390, 100,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
             hStat5 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 1080, 390, 100,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
 
             hStat6 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 1350, 170, 120,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
             hStat7 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 1350, 400, 120,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
             hStat8 = CreateWindow("static", "0", WS_CHILD | WS_VISIBLE, 1010, 180, 120,
-                                  20, hwnd, 0, hInst, NULL);
+                                  20, hwnd, nullptr, hInst, nullptr);
             ShowWindow(hStat, SW_SHOWNORMAL);
 
         case WM_COMMAND: // сообщение о команде
@@ -349,7 +206,7 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
                 a = StrToInt(StrA);
                 Len = GetWindowText(hEdt2, StrA, 20);
                 b = StrToInt(StrA);
-                sum = Encrypt2(a, b);
+                sum = Mult(a, b);
                 SetWindowText(hStat, IntToStr(sum));
             }
 
@@ -358,7 +215,7 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
                 a = StrToInt(StrA);
                 Len = GetWindowText(hEdt2, StrA, 20);
                 b = StrToInt(StrA);
-                sum = Encrypt0(a, b);
+                sum = Summ(a, b);
                 SetWindowText(hStat, IntToStr(sum));
             }
             if (lparam == (LPARAM)Button3) {
@@ -366,20 +223,20 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
                 a = StrToInt(StrA);
                 Len = GetWindowText(hEdt2, StrA, 20);
                 b = StrToInt(StrA);
-                sum = Encrypt1(a, b);
+                sum = Diff(a, b);
                 SetWindowText(hStat, IntToStr(sum));
             }
 
             if (lparam == (LPARAM)Button5) {
                 Len = GetWindowText(hEdt3, StrA, 20);
                 a = StrToInt(StrA);
-                sum = Encrypt4(a);
+                sum = Square(a);
                 SetWindowText(hStat1, IntToStr(sum));
             }
             if (lparam == (LPARAM)Button6) {
                 Len = GetWindowText(hEdt3, StrA, 20);
                 a = StrToInt(StrA);
-                sum = Encrypt5(a);
+                sum = Rnd();
                 SetWindowText(hStat2, IntToStr(sum));
             }
             if (lparam == (LPARAM)Button7) {
@@ -412,7 +269,7 @@ LRESULT WINAPI WndProc(HWND hwnd, UINT Message, WPARAM wparam, LPARAM lparam) {
                 a = StrToInt(StrA);
                 Len = GetWindowText(hEdt6, StrA, 20);
                 b = StrToInt(StrA);
-                sum = Logb(a, b); // находим логарифм
+                sum = Loga_b(a, b); // находим логарифм
                 SetWindowText(hStat5, IntToStr(sum));
             }
             if (lparam == (LPARAM)Button12) {
